@@ -101,7 +101,7 @@
     <string name="import_contacts">导入联系人</string>
     <string name="export_contacts">导出联系人</string>
     <string name="import_contacts_from_vcf">从.vcf档案导入联系人</string>
-    <string name="export_contacts_to_vcf">导出联系人成.vcf档案</string>
+    <string name="export_contacts_to_vcf">导出联系人为.vcf档案</string>
     <string name="target_contact_source">联系人来源</string>
     <string name="include_contact_sources">包含联系人来源</string>
     <string name="filename_without_vcf">档案名称 (不含.vcf)</string>
