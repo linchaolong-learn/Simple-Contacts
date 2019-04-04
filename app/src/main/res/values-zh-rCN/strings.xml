@@ -1,6 +1,7 @@
-<resources>
-    <string name="app_name">简易通讯录</string>
-    <string name="app_launcher_name">简易通讯录</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">微讯</string>
+    <string name="app_launcher_name">微讯</string>
     <string name="address">地址</string>
     <string name="inserting">添加中…</string>
     <string name="updating">更新中…</string>
@@ -19,6 +20,8 @@
     <string name="add_to_existing_contact">添加至已存在的联系人</string>
     <string name="must_make_default_dialer">你必须将该应用设为预设的拨号程序来使用黑名单。</string>
     <string name="set_to_default">设为预设</string>
+
+    <string name="value_copied_to_clipboard" tools:ignore="ExtraTranslation">已复制</string>
 
     <!-- Placeholders -->
     <string name="no_contacts_found">未发现联系人</string>
@@ -158,8 +161,4 @@
         不包含广告及非必要的权限，而且完全開放源代码，并支持自定义颜色。
     </string>
 
-    <!--
-        Haven't found some strings? There's more at
-        https://github.com/SimpleMobileTools/Simple-Commons/tree/master/commons/src/main/res
-    -->
 </resources>
