@@ -1,12 +1,10 @@
 package com.simplemobiletools.commons.activities
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
-import android.view.View
 import com.simplemobiletools.commons.R
 import com.simplemobiletools.commons.dialogs.ConfirmationDialog
 import com.simplemobiletools.commons.extensions.*
@@ -37,14 +35,6 @@ class AboutActivity : BaseSimpleActivity() {
         setupWebsite()
         setupEmail()
         setupFAQ()
-        setupUpgradeToPro()
-        setupMoreApps()
-        setupRateUs()
-        setupInvite()
-        setupLicense()
-        setupFacebook()
-        setupReddit()
-        setupCopyright()
     }
 
     private fun setupWebsite() {
@@ -94,16 +84,6 @@ class AboutActivity : BaseSimpleActivity() {
         about_faq.underlineText()
     }
 
-    private fun setupUpgradeToPro() {
-        about_upgrade_to_pro.beVisibleIf(getCanAppBeUpgraded())
-        about_upgrade_to_pro.setOnClickListener {
-            launchUpgradeToProIntent()
-        }
-
-        about_upgrade_to_pro.setTextColor(linkColor)
-        about_upgrade_to_pro.underlineText()
-    }
-
     private fun openFAQ(faqItems: ArrayList<FAQItem>) {
         Intent(applicationContext, FAQActivity::class.java).apply {
             putExtra(APP_ICON_IDS, getAppIconIDs())
@@ -113,78 +93,6 @@ class AboutActivity : BaseSimpleActivity() {
         }
     }
 
-    private fun setupMoreApps() {
-        about_more_apps.setOnClickListener {
-            launchViewIntent("https://play.google.com/store/apps/dev?id=9070296388022589266")
-        }
-        about_more_apps.setTextColor(linkColor)
-    }
-
-    private fun setupInvite() {
-        about_invite.setOnClickListener {
-            val text = String.format(getString(R.string.share_text), appName, getStoreUrl())
-            Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_SUBJECT, appName)
-                putExtra(Intent.EXTRA_TEXT, text)
-                type = "text/plain"
-                startActivity(Intent.createChooser(this, getString(R.string.invite_via)))
-            }
-        }
-        about_invite.setTextColor(linkColor)
-    }
-
-    private fun setupRateUs() {
-        if (baseConfig.appRunCount < 10) {
-            about_rate_us.visibility = View.GONE
-        } else {
-            about_rate_us.setOnClickListener {
-                try {
-                    launchViewIntent("market://details?id=${packageName.removeSuffix(".debug")}")
-                } catch (ignored: ActivityNotFoundException) {
-                    launchViewIntent(getStoreUrl())
-                }
-            }
-        }
-        about_rate_us.setTextColor(linkColor)
-    }
-
-    private fun setupLicense() {
-        about_license.setOnClickListener {
-            Intent(applicationContext, LicenseActivity::class.java).apply {
-                putExtra(APP_ICON_IDS, getAppIconIDs())
-                putExtra(APP_LAUNCHER_NAME, getAppLauncherName())
-                putExtra(APP_LICENSES, intent.getIntExtra(APP_LICENSES, 0))
-                startActivity(this)
-            }
-        }
-        about_license.setTextColor(linkColor)
-    }
-
-    private fun setupFacebook() {
-        about_facebook.setOnClickListener {
-            var link = "https://www.facebook.com/simplemobiletools"
-            try {
-                packageManager.getPackageInfo("com.facebook.katana", 0)
-                link = "fb://page/150270895341774"
-            } catch (ignored: Exception) {
-            }
-
-            launchViewIntent(link)
-        }
-    }
-
-    private fun setupReddit() {
-        about_reddit.setOnClickListener {
-            launchViewIntent("https://www.reddit.com/r/SimpleMobileTools")
-        }
-    }
-
-    private fun setupCopyright() {
-        val versionName = intent.getStringExtra(APP_VERSION_NAME) ?: ""
-        val year = Calendar.getInstance().get(Calendar.YEAR)
-        about_copyright.text = String.format(getString(R.string.copyright), versionName, year)
-    }
 
     private fun getStoreUrl() = "https://play.google.com/store/apps/details?id=${packageName.removeSuffix(".debug")}"
 }
